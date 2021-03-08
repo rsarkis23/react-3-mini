@@ -43,6 +43,11 @@ class App extends Component {
   getPotentialBuyers() {
     // axios (GET)
     // setState with response -> buyersToDisplay
+    axios.get('https://joes-autos.herokuapp.com/api/buyers')
+      .then(res => {
+        this.setState({ buyersToDisplay: res.data })
+      })
+      .catch(err => console.log(err))
   }
 
   sellCar(id) {
@@ -106,11 +111,21 @@ class App extends Component {
 
     //axios (POST)
     // setState with response -> buyersToDisplay
+    axios.post('https://joes-autos.herokuapp.com/api/buyers', newBuyer)
+        .then(res => {
+          this.setState({ buyersToDisplay: res.data.buyers })
+        })
+    
   }
 
   deleteBuyer(id) {
     // axios (DELETE)
     //setState with response -> buyersToDisplay
+    axios.delete(`https://joes-autos.herokuapp.com/api/buyers/${id}`)
+      .then(res => {
+        this.setState({ buyersToDisplay: res.data.buyers })
+      })
+      .catch(err => console.log(err))
   }
 
   nameSearch() {
